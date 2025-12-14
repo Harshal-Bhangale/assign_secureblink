@@ -58,3 +58,18 @@ def generate_csv_report(domain: str, active_subdomains: List[Dict]) -> None:
         )
         writer.writeheader()
         writer.writerows(active_subdomains)
+
+
+def generate_csv_report(domain: str, active_subdomains: List[Dict]) -> None:
+    csv_dir = os.path.join(os.path.dirname(OUTPUT_DIR), "csv")
+    os.makedirs(csv_dir, exist_ok=True)
+
+    csv_path = os.path.join(csv_dir, f"{domain}.csv")
+
+    with open(csv_path, "w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(
+            file,
+            fieldnames=["subdomain", "status_code"]
+        )
+        writer.writeheader()
+        writer.writerows(active_subdomains)

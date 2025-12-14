@@ -1,0 +1,12 @@
+subdomain,status_code
+auth.secureblink.com,200
+bulkip.secureblink.com,200
+help.secureblink.com,403
+mail.secureblink.com,200
+pbdev.secureblink.com,200
+pbthreatspy.secureblink.com,200
+scan.secureblink.com,200
+scandev.secureblink.com,200
+secureblink.com,200
+threatspy.secureblink.com,200
+www.secureblink.com,200
