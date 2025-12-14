@@ -1,5 +1,7 @@
+
 import sys
-import json
+import json 
+
 
 from amass_runner import run_amass
 from subdomain_parser import parse_subdomains
@@ -10,7 +12,6 @@ from report_generator import generate_json_report
 from exceptions import InvalidDomainError, ReconError
 from config import validate_config
 from shodan_service import enrich_ips
-
 
 def execute_recon(domain: str):
     if not domain or "." not in domain:

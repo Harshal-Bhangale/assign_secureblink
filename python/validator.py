@@ -1,5 +1,7 @@
 from typing import List, Dict
 import requests
+import sys
+
 
 from config import HTTP_TIMEOUT, DEFAULT_HEADERS
 

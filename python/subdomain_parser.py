@@ -1,5 +1,7 @@
 from typing import List
 
+import sys
+
 
 def parse_subdomains(raw_output: List[str]) -> List[str]:
     """

@@ -1,5 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import dns.resolver
+import sys
+
 
 def _resolve(subdomain):
     try:

@@ -1,5 +1,7 @@
 from typing import Dict
 import whois
+import sys
+
 
 
 def get_domain_whois(domain: str) -> Dict:

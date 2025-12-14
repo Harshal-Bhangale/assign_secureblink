@@ -2,6 +2,7 @@ import json
 import os
 import csv
 from typing import List, Dict
+import sys
 
 from config import OUTPUT_DIR
 

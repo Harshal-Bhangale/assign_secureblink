@@ -1,6 +1,8 @@
 import subprocess
 import time
 from typing import List
+import sys
+
 
 from config import AMASS_BINARY
 from exceptions import AmassExecutionError

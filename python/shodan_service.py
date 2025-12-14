@@ -1,5 +1,7 @@
 import os
 import shodan
+import sys
+
 
 SHODAN_API_KEY = os.getenv("SHODAN_API_KEY")
 

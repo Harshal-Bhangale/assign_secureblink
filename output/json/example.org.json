@@ -1,0 +1,73 @@
+{
+    "domain": "example.org",
+    "summary": {
+        "total_subdomains_discovered": 37,
+        "active_subdomains_count": 2
+    },
+    "active_subdomains": [
+        {
+            "subdomain": "example.org",
+            "status_code": 200
+        },
+        {
+            "subdomain": "www.example.org",
+            "status_code": 200
+        }
+    ],
+    "resolved_ips": {
+        "bugsnag.appstore.a2z.com.example.org": [],
+        "googleapis.com.example.org": [],
+        "met.vgwort.de.example.org": [],
+        "ksta.met.vgwort.de.example.org": [],
+        "de.example.org": [],
+        "prime-video.amazon.dev.example.org": [],
+        "minerva.devices.a2z.com.example.org": [],
+        "firebat.prime-video.amazon.dev.example.org": [],
+        "cms.example.org": [],
+        "aca.ftv.bugsnag.appstore.a2z.com.example.org": [],
+        "pfirsich.example.org": [],
+        "amazon.dev.example.org": [],
+        "ftv.bugsnag.appstore.a2z.com.example.org": [],
+        "mx.example.org": [],
+        "devices.a2z.com.example.org": [],
+        "net.example.org": [],
+        "bugs.firebat.prime-video.amazon.dev.example.org": [],
+        "a2z.com.example.org": [],
+        "express.met.vgwort.de.example.org": [],
+        "ns2.example.org": [],
+        "appstore.a2z.com.example.org": [],
+        "com.example.org": [],
+        "ns1.example.org": [],
+        "dev.example.org": [],
+        "fbcdn.net.example.org": [],
+        "test.example.org": [],
+        "vgwort.de.example.org": [],
+        "www.testdomain.example.org": [],
+        "xy.fbcdn.net.example.org": [],
+        "xyz.example.org": [],
+        "notify.aca.ftv.bugsnag.appstore.a2z.com.example.org": [],
+        "prod.service.minerva.devices.a2z.com.example.org": [],
+        "www.example.org": [
+            "172.66.157.88",
+            "104.20.26.109"
+        ],
+        "example.org": [
+            "104.20.26.109",
+            "172.66.157.88"
+        ],
+        "prod-clustered.bugs.firebat.prime-video.amazon.dev.example.org": [],
+        "traffic-nts-ip-assoc.xy.fbcdn.net.example.org": [],
+        "trace-server.prod-clustered.bugs.firebat.prime-video.amazon.dev.example.org": []
+    },
+    "whois_information": {
+        "domain": "example.org",
+        "registrar": "ICANN",
+        "creation_date": "1995-08-31 04:00:00+00:00",
+        "expiration_date": "2026-08-30 04:00:00+00:00",
+        "name_servers": [
+            "katelyn.ns.cloudflare.com",
+            "mitch.ns.cloudflare.com"
+        ]
+    },
+    "shodan_enrichment": {}
+}

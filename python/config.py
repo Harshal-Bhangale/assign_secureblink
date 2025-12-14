@@ -1,4 +1,6 @@
 import os
+import sys
+
 
 AMASS_BINARY = "amass"
 
