@@ -111,7 +111,6 @@ POST /api/recon
   "domain": "example.com"
 }
 
-
 {
   "domain": "example.com",
   "scan_summary": {
@@ -130,16 +129,28 @@ POST /api/recon
   ]
 }
 
+---
+
+
 ## 📊 Output & Reporting
 
-ReconScope generates detailed reconnaissance reports containing:
+- **Discovered Subdomains**  
+  Provides a complete list of all publicly visible subdomains identified during reconnaissance.
 
-- Discovered subdomains  
-- Active and inactive services  
-- IP addresses and HTTP status codes  
-- Risk-based asset classification  
-- Infrastructure exposure insights  
-- Security recommendations  
+- **Active & Inactive Services**  
+  Clearly differentiates live services from inactive or unreachable assets.
+
+- **IP Address & HTTP Status Mapping**  
+  Displays resolved IP addresses and HTTP response codes for better service understanding.
+
+- **Risk-Based Asset Classification**  
+  Categorizes assets into risk levels to help prioritize security actions.
+
+- **Infrastructure Exposure Insights**  
+  Reveals how and where assets are exposed across hosting environments.
+
+- **Security Recommendations**  
+  Offers actionable guidance to reduce attack surface and mitigate risks.
 
 Reports can be exported in **JSON** or **CSV** formats for further analysis or integration with other security tools.
 
@@ -147,31 +158,48 @@ Reports can be exported in **JSON** or **CSV** formats for further analysis or i
 
 ## 🚧 Future Enhancements
 
-Planned improvements include:
+- **Continuous Asset Monitoring**  
+  Enable scheduled scans to track changes in the attack surface over time.
 
-- Continuous asset monitoring  
-- Asset change detection (scan diffing over time)  
-- Authentication and access control  
-- External intelligence enrichment (Shodan, CVE mapping)  
-- Docker and cloud deployment options  
+- **Asset Change Detection**  
+  Compare scan results to detect newly exposed or removed assets.
+
+- **Authentication & Access Control**  
+  Secure API access with authentication and role-based permissions.
+
+- **External Intelligence Enrichment**  
+  Integrate third-party sources such as Shodan and CVE databases for deeper insights.
+
+- **Docker & Cloud Deployment**  
+  Simplify deployment using containerization and cloud-native setups.
 
 ---
 
 ## 📜 License
 
-This project is licensed under the **MIT License**.  
-See the `LICENSE` file for more details.
+- **MIT License**  
+  This project is licensed under the MIT License, allowing free use, modification, and distribution.  
+  See the `LICENSE` file for more details.
 
 ---
 
 ## ⚠️ Legal Disclaimer
 
-This tool must only be used on domains you own or have **explicit authorization** to test.  
-Unauthorized reconnaissance may be illegal. The developers are **not responsible for misuse or damage** caused by this tool.
+- **Authorized Use Only**  
+  This tool must only be used on domains you own or have explicit permission to test.
+
+- **Ethical Responsibility**  
+  Unauthorized reconnaissance may be illegal. The developers are not responsible for misuse or damage caused by this tool.
 
 ---
 
 ## 🏁 Conclusion
 
-ReconScope empowers users with complete visibility into a domain’s public attack surface, enabling proactive security decisions and helping secure exposed assets before attackers exploit them.
+- **Complete Attack Surface Visibility**  
+  ReconScope helps users understand what is publicly exposed about their domain.
 
+- **Proactive Security Decisions**  
+  Enables early identification of risks before attackers can exploit them.
+
+- **Built for Real-World Security Workflows**  
+  Designed for professionals, learners, and organizations focused on improving security posture.
