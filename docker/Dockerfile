@@ -4,47 +4,57 @@
 FROM node:18-bullseye
 
 # ================================
-# Install system dependencies
+# Install System Dependencies
 # ================================
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     curl \
+    tar \
     git \
-    amass \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # ================================
-# Set working directory
+# Install OWASP Amass
+# ================================
+RUN curl -L https://github.com/owasp-amass/amass/releases/latest/download/amass_linux_amd64.tar.gz \
+    -o amass.tar.gz && \
+    tar -xzf amass.tar.gz && \
+    mv amass_linux_amd64/amass /usr/local/bin/amass && \
+    chmod +x /usr/local/bin/amass && \
+    rm -rf amass.tar.gz amass_linux_amd64
+
+# ================================
+# Set Working Directory
 # ================================
 WORKDIR /app
 
 # ================================
-# Copy backend code
+# Copy Backend Code
 # ================================
 COPY server ./server
 COPY python ./python
-COPY output ./output
 
 # ================================
-# Install Node.js dependencies
+# Install Node Dependencies
 # ================================
 WORKDIR /app/server
 RUN npm install
 
 # ================================
-# Install Python dependencies
+# Install Python Dependencies
 # ================================
 WORKDIR /app/python
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # ================================
-# Expose API port
+# Expose Port
 # ================================
 EXPOSE 3000
 
 # ================================
-# Start Express.js API
+# Start Server
 # ================================
 WORKDIR /app/server
 CMD ["npm", "start"]

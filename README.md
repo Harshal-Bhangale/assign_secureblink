@@ -54,82 +54,59 @@ By automating subdomain enumeration and asset identification, ReconScope helps o
 
 ---
 
-## 🛠️ Installation and Setup
 
-ReconScope requires **Node.js** (for the Express.js API) and **Python 3** (for reconnaissance logic).
+# 📘 Postman Collection
+
+The Secure Blink API is documented using Postman, allowing interactive exploration and testing of all available endpoints.
+
+👉 **Postman API Documentation**  
+https://documenter.getpostman.com/view/37932689/2sB3dTs7TA
+
+The Postman collection includes:
+- Endpoint descriptions
+- Sample requests
+- Example responses
+- Error handling details
 
 ---
 
-### Step 1: Install Dependencies
+## 📌 Available Endpoints Overview
 
-ReconScope relies on **OWASP Amass** for passive subdomain enumeration.
+| Method | Endpoint     | Description                                  |
+|--------|-------------|----------------------------------------------|
+| GET    | `/health`    | Check API health status                      |
+| POST   | `/enumerate` | Perform passive reconnaissance on a domain  |
 
-```bash
-# Using Homebrew (macOS / Linux)
-brew install amass
+---
 
-## 🛠️ Installation & Setup
+## 🔍 Endpoint Details
 
-### Step 2: Clone the Repository
+### GET `/health`
 
-```bash
-git clone https://github.com/Harshal-Bhangale/assign_secureblink
-cd reconscope
+Checks whether the API service is running and accessible.
 
-## 🛠️ Installation & Setup
-
-### Step 3: Setup Python Environment
-
-Install the required Python dependencies:
-
-```bash
-pip install -r requirements.txt
-
-### Step 4: Start the Express.js API
-
-Install the Node.js dependencies and start the API server:
-
-```bash
-npm install
-npm start
-
-The API will be available at:
-http://localhost:3000
-
-
-## 🔌 API Usage
-
-ReconScope exposes its core functionality through a REST API.
-
-### Endpoint
-
-
-### Request Body (JSON)
-POST /api/recon
+**Response Example**
 ```json
+{
+  "status": "ok",
+  "message": "API is running"
+}
+
+## 🔍 POST `/enumerate`
+
+Performs **passive reconnaissance** on the provided domain and returns the results in a structured JSON format.
+
+This endpoint triggers the reconnaissance engine to discover subdomains and identify active assets without performing intrusive scanning.
+
+---
+
+### 📥 Request
+
+**Endpoint**
 {
   "domain": "example.com"
 }
 
-{
-  "domain": "example.com",
-  "scan_summary": {
-    "total_subdomains_discovered": 48,
-    "active_subdomains": 16,
-    "inactive_subdomains": 32,
-    "scan_type": "Passive Reconnaissance"
-  },
-  "active_assets": [
-    {
-      "subdomain": "dev.example.com",
-      "ip_address": "34.102.45.41",
-      "http_status": 200,
-      "risk_level": "Critical"
-    }
-  ]
-}
-
----
 
 
 ## 📊 Output & Reporting

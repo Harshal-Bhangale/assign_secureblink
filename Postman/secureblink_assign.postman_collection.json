@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "493ca91c-995a-452e-9630-4ef5a86a52a9",
+		"name": "secureblink_assign",
+		"description": "# SecureBlink Assignment API\n\n## Overview\n\nThis API provides domain enumeration and security analysis capabilities. It allows users to query domain information and perform comprehensive subdomain enumeration for security assessment purposes.\n\n## Base URL\n\n```\nhttp://localhost:3000\n\n ```\n\n## Authentication\n\nCurrently, this API does not require authentication for local development.\n\n## Common Response Codes\n\n- **200 OK**: Request successful\n    \n- **400 Bad Request**: Invalid request parameters or missing required fields\n    \n- **404 Not Found**: Resource not found\n    \n- **500 Internal Server Error**: Server-side error occurred\n    \n\n## Getting Started\n\n1. Ensure the API server is running on `localhost:3000`\n    \n2. Use the provided endpoints to query domain information\n    \n3. For domain enumeration, provide a valid domain name in the request body\n    \n\n## Rate Limiting\n\nPlease be mindful of rate limits when performing domain enumeration operations.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37932689",
+		"_collection_link": "https://www.postman.com/harshal-bhangale-5/workspace/drive-assist-app/collection/37932689-493ca91c-995a-452e-9630-4ef5a86a52a9?action=share&source=collection_link&creator=37932689"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "## Health Check Endpoint\n\n**Method:** `GET`  \n**Endpoint:** `/health`\n\n### Purpose\nThis endpoint provides a simple health check to verify that the API server is running and responsive. It's commonly used for monitoring, load balancer health checks, and deployment verification.\n\n### Request\nNo request body or parameters required.\n\n### Response Structure\nReturns a JSON object with the API status:\n\n```json\n{\n  \"status\": \"API is running\"\n}\n```\n\n**Response Fields:**\n- `status` (string): Indicates the current operational status of the API\n\n### Status Codes\n- **200 OK**: API is healthy and running normally\n- **500 Internal Server Error**: API is experiencing issues\n- **503 Service Unavailable**: API is temporarily unavailable\n\n### Usage\nUse this endpoint to verify API availability before making other requests or as part of automated health monitoring systems."
+			},
+			"response": [
+				{
+					"name": "Successful Health Check",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"health"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n  \"status\": \"API is running\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Domain Enumeration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<div style=\"font-family: Arial, sans-serif; padding: 20px;\">",
+							"    <h2 style=\"color: #333; text-align: center;\">Subdomain Enumeration Results</h2>",
+							"    ",
+							"    <!-- Summary Section -->",
+							"    <div style=\"display: flex; justify-content: center; gap: 30px; margin-bottom: 30px;\">",
+							"        <div style=\"background: #4CAF50; color: white; padding: 20px 40px; border-radius: 8px; text-align: center;\">",
+							"            <div style=\"font-size: 32px; font-weight: bold;\">{{summary.total}}</div>",
+							"            <div style=\"font-size: 14px;\">Total Subdomains Discovered</div>",
+							"        </div>",
+							"        <div style=\"background: #2196F3; color: white; padding: 20px 40px; border-radius: 8px; text-align: center;\">",
+							"            <div style=\"font-size: 32px; font-weight: bold;\">{{summary.active}}</div>",
+							"            <div style=\"font-size: 14px;\">Active Subdomains</div>",
+							"        </div>",
+							"    </div>",
+							"    ",
+							"    <!-- Chart Section -->",
+							"    <div style=\"background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);\">",
+							"        <canvas id=\"statusChart\" height=\"100\"></canvas>",
+							"    </div>",
+							"</div>",
+							"",
+							"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js\"></script>",
+							"<script>",
+							"    var ctx = document.getElementById(\"statusChart\").getContext(\"2d\");",
+							"    ",
+							"    var statusChart = new Chart(ctx, {",
+							"        type: \"bar\",",
+							"        data: {",
+							"            labels: [],",
+							"            datasets: [{",
+							"                label: \"HTTP Status Code\",",
+							"                data: [],",
+							"                backgroundColor: [],",
+							"                borderColor: [],",
+							"                borderWidth: 1",
+							"            }]",
+							"        },",
+							"        options: {",
+							"            responsive: true,",
+							"            legend: { display: false },",
+							"            title: {",
+							"                display: true,",
+							"                text: \"Active Subdomains - HTTP Status Codes\",",
+							"                fontSize: 16",
+							"            },",
+							"            scales: {",
+							"                xAxes: [{",
+							"                    display: true,",
+							"                    scaleLabel: {",
+							"                        display: true,",
+							"                        labelString: \"Subdomain\"",
+							"                    },",
+							"                    ticks: {",
+							"                        autoSkip: false,",
+							"                        maxRotation: 45,",
+							"                        minRotation: 45",
+							"                    }",
+							"                }],",
+							"                yAxes: [{",
+							"                    display: true,",
+							"                    scaleLabel: {",
+							"                        display: true,",
+							"                        labelString: \"Status Code\"",
+							"                    },",
+							"                    ticks: {",
+							"                        beginAtZero: false,",
+							"                        min: 100,",
+							"                        max: 600,",
+							"                        stepSize: 100",
+							"                    }",
+							"                }]",
+							"            },",
+							"            tooltips: {",
+							"                callbacks: {",
+							"                    label: function(tooltipItem, data) {",
+							"                        return \"Status: \" + tooltipItem.yLabel;",
+							"                    }",
+							"                }",
+							"            }",
+							"        }",
+							"    });",
+							"",
+							"    pm.getData(function (err, value) {",
+							"        var subdomains = value.subdomains;",
+							"        ",
+							"        statusChart.data.labels = subdomains.map(function(item) {",
+							"            return item.name;",
+							"        });",
+							"        ",
+							"        statusChart.data.datasets[0].data = subdomains.map(function(item) {",
+							"            return item.status;",
+							"        });",
+							"        ",
+							"        statusChart.data.datasets[0].backgroundColor = subdomains.map(function(item) {",
+							"            if (item.status >= 200 && item.status < 300) {",
+							"                return \"rgba(76, 175, 80, 0.7)\";",
+							"            } else if (item.status >= 300 && item.status < 400) {",
+							"                return \"rgba(255, 193, 7, 0.7)\";",
+							"            } else if (item.status >= 400 && item.status < 500) {",
+							"                return \"rgba(255, 87, 34, 0.7)\";",
+							"            } else {",
+							"                return \"rgba(244, 67, 54, 0.7)\";",
+							"            }",
+							"        });",
+							"        ",
+							"        statusChart.data.datasets[0].borderColor = subdomains.map(function(item) {",
+							"            if (item.status >= 200 && item.status < 300) {",
+							"                return \"rgba(76, 175, 80, 1)\";",
+							"            } else if (item.status >= 300 && item.status < 400) {",
+							"                return \"rgba(255, 193, 7, 1)\";",
+							"            } else if (item.status >= 400 && item.status < 500) {",
+							"                return \"rgba(255, 87, 34, 1)\";",
+							"            } else {",
+							"                return \"rgba(244, 67, 54, 1)\";",
+							"            }",
+							"        });",
+							"        ",
+							"        statusChart.update();",
+							"    });",
+							"</script>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    var response = pm.response.json();",
+							"    var data = response.data.data;",
+							"",
+							"    return {",
+							"        summary: {",
+							"            total: data.summary.total_subdomains_discovered,",
+							"            active: data.summary.active_subdomains_count",
+							"        },",
+							"        subdomains: data.active_subdomains.map(function (item) {",
+							"            // Extract just the subdomain prefix for cleaner labels",
+							"            var parts = item.subdomain.split(\".\");",
+							"            var label = parts.length > 2 ? parts[0] : item.subdomain;",
+							"            return {",
+							"                name: label,",
+							"                status: item.status_code",
+							"            };",
+							"        })",
+							"    };",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"domain\": \"secureblink.com\"\r\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/enumerate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"enumerate"
+					]
+				},
+				"description": "## Domain Enumeration Endpoint\n\n**Method:** `POST`  \n**Endpoint:** `/enumerate`\n\n### Purpose\n\nThis endpoint performs comprehensive subdomain enumeration and security analysis for a specified domain. It's designed for security assessment and reconnaissance purposes, helping identify all discoverable subdomains associated with a target domain.\n\n### Request Body Structure\n\nSend a JSON object with the target domain:\n\n``` json\n{\n  \"domain\": \"example.com\"\n}\n\n ```\n\n**Request Fields:**\n\n- `domain` (string, required): The target domain name to enumerate (e.g., \"example.com\", \"google.com\")\n    \n\n### Response Structure\n\nReturns detailed enumeration results including discovered subdomains and security information:\n\n``` json\n{\n  \"domain\": \"example.com\",\n  \"subdomains\": [\"www.example.com\", \"mail.example.com\", \"api.example.com\"],\n  \"total_found\": 3,\n  \"timestamp\": \"2024-01-15T10:30:00Z\"\n}\n\n ```\n\n**Response Fields:**\n\n- `domain` (string): The queried domain name\n    \n- `subdomains` (array): List of discovered subdomains\n    \n- `total_found` (number): Total count of subdomains found\n    \n- `timestamp` (string): ISO 8601 timestamp of when the enumeration was performed\n    \n\n### Status Codes\n\n- **200 OK**: Enumeration completed successfully\n    \n- **400 Bad Request**: Invalid domain format or missing required field\n    \n- **404 Not Found**: Domain not found or unable to resolve\n    \n- **429 Too Many Requests**: Rate limit exceeded\n    \n- **500 Internal Server Error**: Server error during enumeration process\n    \n\n### Notes\n\n- Enumeration may take several seconds to complete depending on the domain size\n    \n- Please be mindful of rate limits when performing multiple enumerations\n    \n- Ensure you have proper authorization before enumerating domains"
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"domain\": \"secureblink.com\"\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enumerate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enumerate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2300"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8fc-HJvhPoQKGdNc1c792oQ1MIu699U\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 14 Dec 2025 06:06:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"success\": true,\n        \"data\": {\n            \"domain\": \"secureblink.com\",\n            \"summary\": {\n                \"total_subdomains_discovered\": 20,\n                \"active_subdomains_count\": 11\n            },\n            \"active_subdomains\": [\n                {\n                    \"subdomain\": \"auth.secureblink.com\",\n                    \"status_code\": 200\n                },\n                {\n                    \"subdomain\": \"cms2.secureblink.com\",\n                    \"status_code\": 403\n                },\n                {\n                    \"subdomain\": \"help.secureblink.com\",\n                    \"status_code\": 403\n                },\n                {\n                    \"subdomain\": \"mail.secureblink.com\",\n                    \"status_code\": 200\n                },\n                {\n                    \"subdomain\": \"pbdev.secureblink.com\",\n                    \"status_code\": 200\n                },\n                {\n                    \"subdomain\": \"pbthreatspy.secureblink.com\",\n                    \"status_code\": 200\n                },\n                {\n                    \"subdomain\": \"scan.secureblink.com\",\n                    \"status_code\": 200\n                },\n                {\n                    \"subdomain\": \"scandev.secureblink.com\",\n                    \"status_code\": 200\n                },\n                {\n                    \"subdomain\": \"secureblink.com\",\n                    \"status_code\": 200\n                },\n                {\n                    \"subdomain\": \"threatspy.secureblink.com\",\n                    \"status_code\": 200\n                },\n                {\n                    \"subdomain\": \"www.secureblink.com\",\n                    \"status_code\": 200\n                }\n            ],\n            \"resolved_ips\": {\n                \"crm.secureblink.com\": [],\n                \"pb.threatspy.secureblink.com\": [],\n                \"cms.secureblink.com\": [],\n                \"api2.threatspy.secureblink.com\": [],\n                \"support.secureblink.com\": [],\n                \"threatspysb.secureblink.com\": [],\n                \"auth.secureblink.com\": [\n                    \"104.18.22.249\",\n                    \"104.18.23.249\"\n                ],\n                \"www.secureblink.com\": [\n                    \"104.18.23.249\",\n                    \"104.18.22.249\"\n                ],\n                \"secureblink.com\": [\n                    \"104.18.22.249\",\n                    \"104.18.23.249\"\n                ],\n                \"scandev.secureblink.com\": [\n                    \"104.18.23.249\",\n                    \"104.18.22.249\"\n                ],\n                \"scan.secureblink.com\": [\n                    \"104.18.22.249\",\n                    \"104.18.23.249\"\n                ],\n                \"help.secureblink.com\": [\n                    \"104.18.22.249\",\n                    \"104.18.23.249\"\n                ],\n                \"cms2.secureblink.com\": [\n                    \"104.18.23.249\",\n                    \"104.18.22.249\"\n                ],\n                \"mail.secureblink.com\": [\n                    \"34.91.249.129\"\n                ],\n                \"pbdev.secureblink.com\": [\n                    \"104.18.23.249\",\n                    \"104.18.22.249\"\n                ],\n                \"pbthreatspy.secureblink.com\": [\n                    \"104.18.22.249\",\n                    \"104.18.23.249\"\n                ],\n                \"api.threatspy.secureblink.com\": [\n                    \"3.109.245.13\",\n                    \"3.108.167.187\"\n                ],\n                \"api.bulkip.secureblink.com\": [\n                    \"50.16.150.101\",\n                    \"34.192.92.29\",\n                    \"44.194.222.212\"\n                ],\n                \"threatspy.secureblink.com\": [\n                    \"108.159.61.50\",\n                    \"108.159.61.53\",\n                    \"108.159.61.72\",\n                    \"108.159.61.15\"\n                ],\n                \"bulkip.secureblink.com\": [\n                    \"108.159.61.11\",\n                    \"108.159.61.21\",\n                    \"108.159.61.30\",\n                    \"108.159.61.25\"\n                ]\n            },\n            \"whois_information\": {\n                \"domain\": \"secureblink.com\",\n                \"registrar\": \"GoDaddy.com, LLC\",\n                \"creation_date\": \"2019-10-28 10:17:59+00:00\",\n                \"expiration_date\": \"2026-10-28 10:17:59+00:00\",\n                \"name_servers\": [\n                    \"KAI.NS.CLOUDFLARE.COM\",\n                    \"LARA.NS.CLOUDFLARE.COM\"\n                ]\n            },\n            \"shodan_enrichment\": {\n                \"108.159.61.72\": {\n                    \"open_ports\": [\n                        80,\n                        443\n                    ],\n                    \"organization\": \"Amazon.com, Inc.\",\n                    \"os\": null\n                },\n                \"108.159.61.25\": {\n                    \"open_ports\": [\n                        80,\n                        443\n                    ],\n                    \"organization\": \"Amazon.com, Inc.\",\n                    \"os\": null\n                }\n            }\n        }\n    }\n}"
+				},
+				{
+					"name": "Successful Domain Enumeration",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"domain\": \"example.com\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enumerate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enumerate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"domain\": \"example.com\",\n  \"subdomains\": [\n    \"www.example.com\",\n    \"mail.example.com\",\n    \"api.example.com\",\n    \"ftp.example.com\",\n    \"blog.example.com\"\n  ],\n  \"total_found\": 5,\n  \"timestamp\": \"2024-01-15T10:30:00Z\"\n}"
+				}
+			]
+		}
+	]
+}
