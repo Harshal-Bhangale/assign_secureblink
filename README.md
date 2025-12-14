@@ -312,6 +312,13 @@ docker compose down
 ```
 
 
+## Output
+
+![Alt text](outcome\api\home.png)
+
+
+
+
 ## 📊 Output & Reporting
 - **Discovered Subdomains**  
   Provides a complete list of all publicly visible subdomains identified during reconnaissance.
