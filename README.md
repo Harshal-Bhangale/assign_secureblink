@@ -200,6 +200,21 @@ curl -X POST http://localhost:3000/enumerate \
 
 ```
 
+## 📬 API Testing with Postman
+
+This project includes a Postman collection for easy API testing.
+
+### Files
+- `postman/Amass-Recon.postman_collection.json` – API requests
+- `postman/local.postman_environment.json` – Environment variables
+
+### How to Use
+1. Open Postman
+2. Click **Import**
+3. Import the collection and environment files
+4. Select the environment
+5. Run API requests directly
+
 ## 🚀 How to Run the Application
 This application is fully containerized using Docker, so users do not need to install Node.js, Python, or Amass manually.
 ### ✅ Prerequisites
