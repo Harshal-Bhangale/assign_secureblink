@@ -1,0 +1,15 @@
+node_modules/
+* text=auto
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+

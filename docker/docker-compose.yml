@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  recon-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: amass-recon-api
+    ports:
+      - "3000:3000"
+    environment:
+      - SHODAN_API_KEY=${SHODAN_API_KEY}
+    volumes:
+      - ../output:/app/output
+    restart: unless-stopped
