@@ -1,4 +1,4 @@
-# 🌐 ReconScope  
+# 🌐 ReconScope (By Secure Blink) 
 ### Comprehensive Domain Reconnaissance Tool
 
 ReconScope is a powerful, open-source reconnaissance tool designed to provide **clear visibility into a domain's public attack surface**.  
@@ -118,6 +118,16 @@ assign_secureblink/
 ├── README.md
 └── LICENSE
 ```
+
+## 🛠️ Tech Stack
+
+- Backend API: Express.js (Node.js)
+- Recon Engine: Python
+- Recon Tool: OWASP Amass
+- Frontend: React + Tailwind CSS
+- Containerization: Docker & Docker Compose
+- API Testing: Postman
+
 
 ## 📘 Postman Collection
 
