@@ -54,6 +54,70 @@ By automating subdomain enumeration and asset identification, ReconScope helps o
 
 ---
 
+## 📁 Project Structure
+
+```text
+assign_secureblink/
+│
+├── docker/                         # Docker configuration
+│   ├── Dockerfile                 # Container definition
+│   └── docker-compose.yml         # Service orchestration
+│
+├── server/                         # Express.js API
+│   ├── src/
+│   │   ├── app.js                 # Express app configuration
+│   │   ├── server.js              # Server entry point
+│   │   ├── routes/
+│   │   │   └── recon.routes.js    # API routes
+│   │   ├── controllers/
+│   │   │   └── recon.controller.js# API logic
+│   │   ├── services/
+│   │   │   └── python.service.js  # Python execution service
+│   │   ├── middlewares/
+│   │   │   ├── validate.middleware.js
+│   │   │   └── error.middleware.js
+│   │   └── utils/
+│   │       └── logger.js
+│   ├── package.json
+│   │
+│
+├── python/                         # Reconnaissance Core (Python)
+│   ├── main.py                    # Orchestrates recon workflow
+│   ├── amass_runner.py            # Runs OWASP Amass
+│   ├── subdomain_parser.py        # Parses Amass output
+│   ├── validator.py               # Active subdomain validation
+│   ├── resolver.py                # DNS resolution
+│   ├── whois_service.py           # WHOIS lookup
+│   ├── shodan_service.py          # Shodan enrichment (optional)
+│   ├── report_generator.py        # JSON / CSV report generator
+│   ├── config.py                  # Configuration
+│   ├── exceptions.py              # Custom exceptions
+│   └── requirements.txt
+│
+├── output/                         # Generated reports
+│   ├── json/                      # JSON outputs
+│   └── csv/                       # CSV outputs
+│
+├── client/                         # Frontend (React + Tailwind)
+│   ├── src/
+│   │   ├── app/                   # App entry
+│   │   ├── components/            # UI components
+│   │   ├── pages/                 # Pages
+│   │   ├── services/              # API services
+│   │   └── styles/                # Styling
+│   └── package.json
+│
+├── postman/                        # API testing
+│   └── Amass-Recon.postman_collection.json
+│
+├── docs/                           # Documentation
+│   ├── Architecture.md
+│   ├── API_Documentation.md
+│   └── Sample_Report.md
+│
+├── README.md
+└── LICENSE
+```
 
 # 📘 Postman Collection
 
@@ -78,39 +142,152 @@ The Postman collection includes:
 | POST   | `/enumerate` | Perform passive reconnaissance on a domain  |
 
 ---
-
-## 🔍 Endpoint Details
-
-### GET `/health`
-
-Checks whether the API service is running and accessible.
-
-**Response Example**
-```json
-{
-  "status": "ok",
-  "message": "API is running"
-}
-
-## 🔍 POST `/enumerate`
-
-Performs **passive reconnaissance** on the provided domain and returns the results in a structured JSON format.
-
-This endpoint triggers the reconnaissance engine to discover subdomains and identify active assets without performing intrusive scanning.
-
----
-
-### 📥 Request
-
-**Endpoint**
+### 📥 Sample Request
+**POST /enumerate**
+```bash
 {
   "domain": "example.com"
 }
+```
 
+**📤 Sample Response**
+```bash
+{
+  "success": true,
+  "data": {
+    "domain": "example.com",
+    "summary": {
+      "total_subdomains_discovered": 42,
+      "active_subdomains_count": 18
+    },
+    "active_subdomains": [
+      {
+        "subdomain": "www.example.com",
+        "status_code": 200
+      }
+    ],
+    "resolved_ips": {
+      "www.example.com": ["93.184.216.34"]
+    },
+    "whois_information": {
+      "registrar": "IANA",
+      "creation_date": "1995-08-13",
+      "expiration_date": "2025-08-13"
+    }
+  }
+}
+```
+
+## 🧪 Testing the API
+
+The Secure Blink API can be tested using multiple methods, depending on your workflow and preference.
+
+### Available Testing Options
+
+- **Postman** (recommended for interactive testing)
+- **cURL** (command-line testing)
+
+---
+
+### 🔹 Example: Testing with cURL
+
+Use the following command to trigger domain reconnaissance via the API:
+
+```bash
+curl -X POST http://localhost:3000/enumerate \
+  -H "Content-Type: application/json" \
+  -d '{"domain":"example.com"}'
+
+```
+
+## 🚀 How to Run the Application
+This application is fully containerized using Docker, so users do not need to install Node.js, Python, or Amass manually.
+### ✅ Prerequisites
+
+Before running the application, ensure the following requirements are met:
+
+- **Docker Desktop** installed  
+  👉 https://www.docker.com/products/docker-desktop/
+
+- **WSL 2 enabled** (required for Windows users)
+
+- **Active internet connection**  
+  Required for pulling Docker images and dependencies
+
+---
+
+
+### ▶️ Step-by-Step: Run Using Docker
+
+#### 🔹 Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/Harshal-Bhangale/assign_secureblink
+cd assign_secureblink
+```
+
+#### 🔹 Step 2: (Optional) Set Shodan API Key
+```bash
+export SHODAN_API_KEY=your_api_key_here
+```
+
+#### 🔹 Step 3: Build the Docker Image
+```bash
+cd docker
+docker compose build
+```
+##### 📌 This builds the image with:
+- Express.js API
+- Python Recon Engine
+- OWASP Amass
+
+#### 🔹 Step 4: Run the Container
+```bash
+docker compose up
+```
+Expected output:
+```bash
+🚀 Server running on port 3000
+```
+
+#### 🧪 Step 5: Verify the Application
+✅ Health Check
+
+Open browser or Postman:
+```bash
+GET http://localhost:3000/health
+```
+Response:
+```bash
+{
+  "status": "API is running"
+}
+```
+✅ Run Recon (API Call)
+
+Using Postman or Curl:
+```bash
+POST http://localhost:3000/enumerate
+Content-Type: application/json
+
+{
+  "domain": "example.com"
+}
+```
+#### 📂 Output Files Location
+Results are saved automatically to:
+```bash
+assign_secureblink/output/json/example.com.json
+assign_secureblink/output/csv/example.com.csv
+```
+
+#### ⏹️ Stop the Application
+```bash
+docker compose down
+```
 
 
 ## 📊 Output & Reporting
-
 - **Discovered Subdomains**  
   Provides a complete list of all publicly visible subdomains identified during reconnaissance.
 
@@ -152,23 +329,6 @@ Reports can be exported in **JSON** or **CSV** formats for further analysis or i
 
 ---
 
-## 📜 License
-
-- **MIT License**  
-  This project is licensed under the MIT License, allowing free use, modification, and distribution.  
-  See the `LICENSE` file for more details.
-
----
-
-## ⚠️ Legal Disclaimer
-
-- **Authorized Use Only**  
-  This tool must only be used on domains you own or have explicit permission to test.
-
-- **Ethical Responsibility**  
-  Unauthorized reconnaissance may be illegal. The developers are not responsible for misuse or damage caused by this tool.
-
----
 
 ## 🏁 Conclusion
 
