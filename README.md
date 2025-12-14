@@ -314,8 +314,7 @@ docker compose down
 
 ## Output
 
-![Alt text](outcome\api\home.png)
-
+![Output](https://ibb.co/zht2CnVN)
 
 
 
